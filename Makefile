@@ -64,3 +64,11 @@ fmt:
 test:
 	@echo "==> testing"
 	${GOCMD} test ./... -v
+
+local-release:
+	@echo "==> local release"
+	goreleaser release  --clean --skip-publish --snapshot --timeout 60m
+
+release:
+	@echo "==> release"
+	goreleaser release  --clean --timeout 60m --debug

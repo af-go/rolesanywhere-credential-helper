@@ -6,7 +6,6 @@ require (
 	github.com/aws/aws-sdk-go v1.48.0
 	github.com/spf13/cobra v1.8.0
 	golang.org/x/crypto v0.15.0
-	golang.org/x/sys v0.14.0
 )
 
 require (

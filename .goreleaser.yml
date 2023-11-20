@@ -1,0 +1,60 @@
+gomod:
+  proxy: true
+  env:
+    - GOPRIVATE=sqbu-github.cisco.com
+
+env:
+  - GOPRIVATE=sqbu-github.cisco.com
+  - CGO_ENABLED=0
+
+before:
+  hooks:
+    - git config --global url.https://{{ .Env.GITHUB_TOKEN }}@sqbu-github.cisco.com.insteadOf https://sqbu-github.cisco.com
+    - go mod tidy
+
+# in jenkins, files created in goreleaser docker are owned by root, so do not create dist in current directory
+dist: /tmp/rolesanywhere-credential-helper
+builds:
+- main: main.go
+  binary: dist/aws_signing_helper
+  id: main
+  ldflags: -s -extldflags "-static"
+  goos:
+    - linux
+    - darwin
+    - windows
+
+archives:
+- name_template: >-
+    {{- .ProjectName }}_
+    {{- .Version }}_
+    {{- if eq .Os "darwin" }}macOS_
+    {{- else if eq .Os "linux" }}Linux_
+    {{- else if eq .Os "windows"}}Windows_
+    {{- else }}{{ .Os }}_{{ end }}
+    {{- if eq .Arch "386" }}i386
+    {{- else if eq .Arch "amd64" }}x86_64
+    {{- else }}{{ .Arch }}{{ end -}}
+  files:
+    - plugin.yaml
+  format: zip
+
+github_urls:
+  api: https://sqbu-github.cisco.com/api/v3/
+  upload: https://sqbu-github.cisco.com/api/uploads/
+  download: https://sqbu-github.cisco.com/
+  # set to true if you use a self-signed certificate
+release:
+  github:
+    owner: WebexPlatform
+    name: rolesanywhere-credential-helper
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
