@@ -16,7 +16,7 @@ before:
 dist: /tmp/rolesanywhere-credential-helper
 builds:
 - main: main.go
-  binary: dist/aws_signing_helper
+  binary: aws_signing_helper
   id: main
   ldflags: -s -extldflags "-static"
   goos:
@@ -35,9 +35,9 @@ archives:
     {{- if eq .Arch "386" }}i386
     {{- else if eq .Arch "amd64" }}x86_64
     {{- else }}{{ .Arch }}{{ end -}}
+  format: tar.gz
   files:
-    - plugin.yaml
-  format: zip
+  - LICENSE
 
 github_urls:
   api: https://sqbu-github.cisco.com/api/v3/
