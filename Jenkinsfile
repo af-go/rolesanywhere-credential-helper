@@ -8,7 +8,7 @@ pipeline {
         ansiColor('xterm')
     }
     stages {
-        stage('Lint') {
+        stage('Lint and Gosec') {
             agent {
                 docker {
                     image 'golang:1.20.7'
@@ -24,7 +24,9 @@ pipeline {
                     git config --global \
                         url.https://${GITHUB_TOKEN}@sqbu-github.cisco.com.insteadOf \
                         https://sqbu-github.cisco.com
+                    make dep
                     make lint
+                    #make gosec
                 '''
             }
         }
@@ -45,7 +47,7 @@ pipeline {
                             git config --global \
                                 url.https://${GITHUB_TOKEN}@sqbu-github.cisco.com.insteadOf \
                                 https://sqbu-github.cisco.com
-                            ./build.bash
+                            make build
                         '''
                     }
                 }

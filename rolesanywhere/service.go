@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/client"
 	"github.com/aws/aws-sdk-go/aws/client/metadata"
 	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/aws/signer/v4"
+	v4 "github.com/aws/aws-sdk-go/aws/signer/v4"
 	"github.com/aws/aws-sdk-go/private/protocol"
 	"github.com/aws/aws-sdk-go/private/protocol/restjson"
 )
@@ -40,13 +40,14 @@ const (
 // aws.Config parameter to add your extra config.
 //
 // Example:
-//     mySession := session.Must(session.NewSession())
 //
-//     // Create a RolesAnywhere client from just a session.
-//     svc := rolesanywhere.New(mySession)
+//	mySession := session.Must(session.NewSession())
 //
-//     // Create a RolesAnywhere client with additional configuration
-//     svc := rolesanywhere.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
+//	// Create a RolesAnywhere client from just a session.
+//	svc := rolesanywhere.New(mySession)
+//
+//	// Create a RolesAnywhere client with additional configuration
+//	svc := rolesanywhere.New(mySession, aws.NewConfig().WithRegion("us-west-2"))
 func New(p client.ConfigProvider, cfgs ...*aws.Config) *RolesAnywhere {
 	c := p.ClientConfig(EndpointsID, cfgs...)
 	if c.SigningNameDerived || len(c.SigningName) == 0 {

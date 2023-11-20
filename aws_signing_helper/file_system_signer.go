@@ -8,10 +8,11 @@ import (
 	"crypto/sha512"
 	"crypto/x509"
 	"errors"
-	"golang.org/x/crypto/pkcs12"
 	"io"
 	"log"
 	"os"
+
+	"golang.org/x/crypto/pkcs12"
 )
 
 type FileSystemSigner struct {

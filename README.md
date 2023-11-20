@@ -1,3 +1,8 @@
+Note: This project is customized to remove glic depenency.
+
+If you want to view source code of whole project, please go to [original source](https://github.com/aws/rolesanywhere-credential-helper.git)
+
+
 ## AWS IAM Roles Anywhere Credential Helper
 rolesanywhere-credential-helper implements the [signing process](https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-sign-process.html) for IAM Roles Anywhere's [CreateSession](https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html) API and returns temporary credentials in a standard JSON format that is compatible with the `credential_process` feature available across the language SDKs. More information can be found [here](https://docs.aws.amazon.com/rolesanywhere/latest/userguide/credential-helper.html). It is released and licensed under the Apache License 2.0.
 
