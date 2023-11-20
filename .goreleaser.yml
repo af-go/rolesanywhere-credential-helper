@@ -18,6 +18,8 @@ builds:
 - main: main.go
   binary: aws_signing_helper
   id: main
+  flags:
+    - -v
   ldflags: -s -extldflags "-static"
   goos:
     - linux
@@ -37,7 +39,7 @@ archives:
     {{- else }}{{ .Arch }}{{ end -}}
   format: tar.gz
   files:
-  - LICENSE
+  - none*
 
 github_urls:
   api: https://sqbu-github.cisco.com/api/v3/
