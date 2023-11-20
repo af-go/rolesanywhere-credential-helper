@@ -1,7 +1,10 @@
-VERSION=1.0.5
+VERSION=1.0.5-1
 
 release:
 	go build -buildmode=pie -ldflags "-X 'github.com/aws/rolesanywhere-credential-helper/cmd.Version=${VERSION}' -linkmode=external -w -s" -trimpath -o build/bin/aws_signing_helper main.go
+
+credential-process-only:
+	go build -ldflags "-X 'github.com/aws/rolesanywhere-credential-helper/cmd.Version=${VERSION}' " -tags credential-process-only -o build/bin/aws_signing_helper main.go
 
 certsdir=tst/certs
 curdir=$(shell pwd)

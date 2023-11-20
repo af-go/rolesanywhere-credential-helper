@@ -1,5 +1,3 @@
-//go:build linux
-
 package aws_signing_helper
 
 import (
